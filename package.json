@@ -1,0 +1,9 @@
+{
+  "name": "aws-devops-project",
+  "version": "1.0.0",
+  "description": "Containerized Node.js application deployed on AWS EC2",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  }
+}

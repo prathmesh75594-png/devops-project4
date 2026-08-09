@@ -1,11 +1,12 @@
 pipeline {
+
     agent any
 
     stages {
 
         stage('Checkout') {
             steps {
-                echo 'Checking out Project 4 source code...'
+                echo 'Checking out source code...'
                 checkout scm
             }
         }
@@ -24,6 +25,24 @@ pipeline {
             }
         }
 
+        stage('Deploy to EC2') {
+            steps {
+                echo 'Deploying application to EC2...'
+
+                sshagent(['ec2-ssh']) {
+                    sh '''
+                        ssh -o StrictHostKeyChecking=no ubuntu@52.62.217.106 "
+                            cd ~/devops-project4 &&
+                            git pull origin main &&
+                            sudo docker build -t devops-project4:latest . &&
+                            sudo docker stop devops-project4-app || true &&
+                            sudo docker rm devops-project4-app || true &&
+                            sudo docker run -d --name devops-project4-app -p 3000:3000 devops-project4:latest
+                        "
+                    '''
+                }
+            }
+        }
     }
 
     post {

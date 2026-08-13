@@ -29,7 +29,7 @@ pipeline {
             steps {
                 echo 'Deploying application to EC2...'
 
-                sshagent(['ec2-ssh']) {
+                sshagent(['ubuntu']) {
                     sh '''
                         ssh -o StrictHostKeyChecking=no ubuntu@54.252.203.97 "
                             cd ~/devops-project4 &&

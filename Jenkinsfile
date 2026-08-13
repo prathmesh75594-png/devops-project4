@@ -31,7 +31,7 @@ pipeline {
 
                 sshagent(['ubuntu']) {
                     sh '''
-                        ssh -o StrictHostKeyChecking=no ubuntu@54.252.203.97 "
+                        ssh -o StrictHostKeyChecking=no ubuntu@13.55.71.41 "
                             cd ~/devops-project4 &&
                             git pull origin main &&
                             sudo docker build -t devops-project4:latest . &&
